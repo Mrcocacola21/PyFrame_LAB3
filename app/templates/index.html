@@ -1,0 +1,43 @@
+﻿{% extends "base.html" %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+  <div class="toolbar">
+    <a class="btn" href="/products/new">Add Product</a>
+  </div>
+
+  {% if products %}
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for product in products %}
+          <tr>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ "%.2f"|format(product.price) }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.category }}</td>
+            <td>
+              <a class="btn secondary" href="/products/{{ product.id }}/edit">Edit</a>
+              <form class="inline" action="/products/{{ product.id }}/delete" method="post">
+                <button class="btn danger" type="submit">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No products yet. Click "Add Product" to create one.</p>
+  {% endif %}
+{% endblock %}
