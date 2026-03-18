@@ -1,7 +1,10 @@
 ﻿[project]
 name = "lab3-fastapi"
 version = "0.1.0"
-description = "FastAPI CRUD app for lab assignment"
+description = "Python Frameworks"
+authors = [
+  { name = "Zienienkov Maksym" }
+]
 requires-python = ">=3.10"
 dependencies = [
   "fastapi>=0.110",
