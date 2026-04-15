@@ -31,14 +31,15 @@ def get_product_or_404(product_id: int, db: DbSession) -> models.Product:
 def read_products(request: Request, db: DbSession):
     products = crud.get_products(db)
     return templates.TemplateResponse(
+        request,
         "index.html",
-        {"request": request, "products": products},
+        {"products": products},
     )
 
 
 @router.get("/products/new", response_class=HTMLResponse)
 def create_product_form(request: Request):
-    return templates.TemplateResponse("create.html", {"request": request})
+    return templates.TemplateResponse(request, "create.html")
 
 
 @router.post("/products/new")
@@ -53,8 +54,9 @@ def edit_product_form(
     product: models.Product = Depends(get_product_or_404),
 ):
     return templates.TemplateResponse(
+        request,
         "edit.html",
-        {"request": request, "product": product},
+        {"product": product},
     )
 
 
